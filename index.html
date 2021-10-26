@@ -8,23 +8,59 @@
   <title>Score Card</title>
 </head>
 <body>
-  <div class="container">
+  <div class="EnterContainer">
   <!-- landing page -->
-    <h1>It's a good day to play some golf!</h1>
+    <h1>Let's Golf!</h1>
     <!-- then you want to have a drop down with the avalible courses, how many holes they are wanting to do, input boxes for player names (x4), optional handicap,  -->
-  <!-- golf score card -->
-    <!-- <div id="mainScoreCard">
-      <ul data-allItems>
-        <li data-holes>1</li>
-        <li data-yards>2</li>
-        <li data-par>3</li>
-        <li data-handicap>4</li>
-      </ul>
-      <ul data-players>
+    <div class="dropdown" data-course>
+      <button class="dropbtn">Players</button>
+      <div class="dropdown-content">
+        <button onclick="amountOfPlayers(1)" data-PButton>1</button>
+        <button onclick="amountOfPlayers(2)" data-PButton>2</button>
+        <button onclick="amountOfPlayers(3)" data-PButton>3</button>
+        <button onclick="amountOfPlayers(4)" data-PButton>4</button>
+      </div>
+    </div>
+
+    <form id="formArea" action="/action_page.php" data-players></form>
+
+    <div class="dropdown" data-course>
+      <button class="dropbtn">Course</button>
+      <div class="dropdown-content">
+        <button onclick="coursePlaying('fox')">Fox Hallow</button>
+        <button onclick="coursePlaying('thanksgiving')">Thanksgiving Point</button>
+        <button onclick="coursePlaying('idk')">IDk</button>
+      </div>
+    </div>
+
+    <div class="dropdown" data-tees>
+      <button class="dropbtn">Tees</button>
+      <div class="dropdown-content">
+        <button onclick="getTees('black')">Black</button>
+        <button onclick="getTees('blue')">Blue</button>
+        <button onclick="getTees('gold')">Gold</button>
+      </div>
+    </div>
+
+    <div class="dropdown" data-tees>
+      <button class="dropbtn">Holes</button>
+      <div class="dropdown-content">
+        <button onclick="getHoles(9)">9</button>
+        <button onclick="getHoles(18)">18</button>
         
-      </ul>
-    </div> -->
+      </div>
+    </div>
+
+    <button class="dropbtn startBtn" onclick="startRound()">Start Round</button>
+  </div>
+<!--  Score Card area -->
+  <div class="scoreCard">
 
   </div>
+
 </body>
+<script src="https://code.jquery.com/jquery-3.5.0.slim.min.js" 
+            integrity="sha256-MlusDLJIP1GRgLrOflUQtshyP0TwT/RHXsI1wWGnQhs="
+            crossorigin="anonymous">
+    </script>
 </html>
