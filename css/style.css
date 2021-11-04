@@ -2,9 +2,10 @@
   padding: 0;
   margin: 0;
   box-sizing: border-box;
+  font-size: 0.9rem;
 }
 
-body {
+.scoreCard td .scoreInput, .scoreCard, body {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -92,6 +93,20 @@ ul {
 
 .startBtn:hover {
   background-color: #3e8e41;
+}
+
+td {
+  width: 3rem;
+}
+
+.scoreCard {
+  margin: 5rem;
+}
+.scoreCard input {
+  width: 80%;
+}
+.scoreCard input {
+  width: 2.5rem;
 }
 
 /*# sourceMappingURL=style.css.map */

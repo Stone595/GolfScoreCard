@@ -7,6 +7,7 @@ $bblack : #262f3b;
   padding: 0;
   margin: 0;
   box-sizing: border-box;
+  font-size: .9rem;
 }
 %flexAll{
   display: flex; 
@@ -103,5 +104,21 @@ ul{
 
 // Main Score Card Page 
 //
-//
+td{
+  width: 3rem;
+}
+.scoreCard {
+  margin: 5rem;
+  @extend %flexAll;
+  input{
+    width: 80%;
+  }
+  td .scoreInput{
+    @extend %flexAll
 
+  }
+  input{
+    width: 2.5rem;
+  }
+  
+}
