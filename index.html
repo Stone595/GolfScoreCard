@@ -12,11 +12,11 @@
   <title>Score Card</title>
 </head>
 <body>
-  <!-- <div class="EnterContainer">
-  landing page
+  <div class="EnterContainer">
+
     <h1>Let's Golf!</h1>
 
-    then you want to have a drop down with the avalible courses, how many holes they are wanting to do, input boxes for player names (x4), optional handicap, 
+
     <div class="dropdown" data-course>
       <button class="dropbtn">Players</button>
       <div class="dropdown-content">
@@ -30,23 +30,24 @@
     <form id="formArea" action="/action_page.php" data-players></form>
 
     <div class="dropdown" data-course>
-      <button class="dropbtn">Course</button>
+      <button id="avCor"class="dropbtn">Course</button>
       <div id="avCourses"class="dropdown-content">
         
       </div>
     </div>
 
     <div class="dropdown" data-tees>
-      <button class="dropbtn">Tees</button>
-      <div class="dropdown-content">
-        <button onclick="getTees('black')">Black</button>
-        <button onclick="getTees('blue')">Blue</button>
-        <button onclick="getTees('gold')">Gold</button>
+      <button id="teeSelector"class="dropbtn">Tees</button>
+      <div id="teeDrop"class="dropdown-content">
+        <button onclick="getTees('pro')">Pro</button>
+        <button onclick="getTees('champion')">Champion</button>
+        <button onclick="getTees('men')">Men</button>
+        <button onclick="getTees('women')">Women</button>
       </div>
     </div>
 
     <div class="dropdown" data-tees>
-      <button class="dropbtn">Holes</button>
+      <button id="holesSelector"class="dropbtn">Holes</button>
       <div class="dropdown-content">
         <button onclick="getHoles(9)">9</button>
         <button onclick="getHoles(18)">18</button>
@@ -55,33 +56,24 @@
     </div>
 
     <button class="dropbtn startBtn" onclick="startRound()">Start Round</button>
- </div> -->
+ </div>
 
 <!--  Score Card area -->
-   <div class="scoreCard">
+   <!-- <div class="scoreCard">
     <table class="table table table-bordered">
       <thead>
         <tr id="appendHoles"> 
-          <!-- put in a function to display the amount of holes -->
+
           <th  data-holes scope="col">Holes</th>
           <div id="screwThis"></div>
-          <!-- <th scope="col">1</th>
-          <th scope="col">2</th>
-          <th scope="col">3</th>
-          <th scope="col">4</th>
-          <th scope="col">5</th>
-          <th scope="col">6</th>
-          <th scope="col">7</th>
-          <th scope="col">8</th>
-          <th scope="col"></th>
-          <th scope="col">Out</th> -->
+          
         </tr>
       </thead>
       <tbody>
-        <!-- put in a function -->
+
         <tr>
           <th scope="row">black</th>
-          <!-- put in a function to display the yars per hole -->
+
           <td id='hole1Yds'>666yds</td>
           <td>666yds</td>
     
@@ -96,26 +88,26 @@
           
           <td >666yds</td>
         </tr>
-        <!-- put in a function -->
+
         <tr>
           <th scope="row">handicap</th>
           <td >1</td>
           
         </tr>
-        <!-- put in a function -->
+
         <tr id="player1">
-          <!-- put in a fuction to populate the input boxes for the holes -->
+
           <th scope="row" id="playerName">Player Name</th>
           <td data-scoreInput class="scoreInput"><input type="number"></td>
         </tr>
         <tr>
           <th id="parForHole" scope="row">Par</th>
-          <!-- put in a function -->
+
           <td>4</td>
         </tr>
       </tbody>
     </table>
-  </div> 
+  </div>  -->
 
 </body>
 <script src="https://code.jquery.com/jquery-3.5.0.slim.min.js" 

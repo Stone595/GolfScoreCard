@@ -24,6 +24,10 @@ ul {
   list-style: none;
 }
 
+button {
+  min-width: 8rem;
+}
+
 .EnterContainer {
   flex-direction: column;
   height: 75vh;

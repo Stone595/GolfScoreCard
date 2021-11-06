@@ -32,10 +32,13 @@ body{
 ul{
   list-style: none;
 }
-
+button{
+  min-width: 8rem
+}
 //Loading page 
 // 
 // 
+
 .EnterContainer{
  @extend %flexAlign;
  flex-direction: column;
@@ -107,6 +110,9 @@ ul{
 td{
   width: 3rem;
 }
+// .centerTd{
+//   @extend %flexJust;
+// }
 .scoreCard {
   margin: 5rem;
   @extend %flexAll;
