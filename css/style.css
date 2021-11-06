@@ -18,6 +18,7 @@
 
 body {
   padding: 5rem;
+  flex-direction: column;
 }
 
 ul {
@@ -101,6 +102,10 @@ button {
 
 td {
   width: 3rem;
+}
+
+.courseTitle {
+  font-size: 2.2rem;
 }
 
 .scoreCard {

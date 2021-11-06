@@ -24,15 +24,13 @@ function amountOfPlayers(x) {
   };
 }
 
-// grab the object and then loop through the availible tee boxes on that course
-
-
-
+// first page. Change the html to the holes they choe 
 function getHoles(numberOfHoles) {
   numOfHoles = numberOfHoles
   document.getElementById('holesSelector').innerText = `Holes: ${numOfHoles}`
 }
 
+//First page. Display the tees they chose
 function getTees(tees1) {
   if(tees1 == 'pro') {tees = 'pro'; teeNumber = 0;};
   if(tees1 == 'champion') {tees = 'champion'; teeNumber = 1;};
@@ -41,6 +39,42 @@ function getTees(tees1) {
   document.getElementById('teeSelector').innerText = `Tees: ${tees}`
 }
 
+
+//display the avalible courses on first page
+fetch(`http://golf-courses-api.herokuapp.com/courses`)
+.then(response => response.json())
+.then(json =>{
+  let n1 = json.courses[0].name; 
+  let n2 = json.courses[1].name; 
+  let n3 = json.courses[2].name;
+  $('#avCourses').append(`
+  <button id="foxSelector"onclick="getCourseId('fox')">${n1}</button>
+  <button id="thanksSelector"onclick="getCourseId('thanks')">${n2}</button>
+  <button id="spanishSelector"onclick="getCourseId('spanish')">${n3}</button>
+  `)
+})
+
+
+function getCourseId(name) {
+  if(name == 'fox'){
+    //fox Hallow
+    course = 'Fox Hollow Golf course'
+    courseId = 18300;
+    document.getElementById('avCor').innerText = `Course: Fox Hollow`;
+  } else if(name == 'thanks'){
+    //thanksgiving
+    course = 'Thanksgiving Point Golf Course'
+    courseId = 11819;
+    document.getElementById('avCor').innerText = `Course: Thanksgiving Point`;
+  } else{
+    //spanish
+    course = 'Spanish Oaks Golf Course'
+    courseId = 19002
+    document.getElementById('avCor').innerText = `Course: Spanish Oaks`;
+  }
+}
+
+//Get course data function
 function getCourseData(id) {
   if(id){
     return fetch('http://golf-courses-api.herokuapp.com/courses/' + id)
@@ -51,38 +85,10 @@ function getCourseData(id) {
   }
 }
 
-fetch(`http://golf-courses-api.herokuapp.com/courses`)
-  .then(response => response.json())
-  .then(json =>{
-    let n1 = json.courses[0].name; 
-    let n2 = json.courses[1].name; 
-    let n3 = json.courses[2].name;
-    $('#avCourses').append(`
-      <button id="foxSelector"onclick="getCourseId('fox')">${n1}</button>
-      <button id="thanksSelector"onclick="getCourseId('thanks')">${n2}</button>
-      <button id="spanishSelector"onclick="getCourseId('spanish')">${n3}</button>
-      `)
- })
-
-
-function getCourseId(name) {
-  if(name == 'fox'){
-    //fox Hallow
-    courseId = 18300;
-    document.getElementById('avCor').innerText = `Course: Fox Hollow`;
-  } else if(name == 'thanks'){
-    //thanksgiving
-    courseId = 11819;
-    document.getElementById('avCor').innerText = `Course: Thanksgiving Point`;
-  } else{
-    //spanish
-    courseId = 19002
-    document.getElementById('avCor').innerText = `Course: Spanish Oaks`;
-  }
-}
-
+//Start the round and
 function startRound() {
-  //get the names of the players
+
+  //get the names of the players and check to make sure its not used
   players = []
   for (let i = 1; i < numOfPlayers +1; i++) {
     let tempName = document.getElementById(`player${i}`).value;
@@ -91,9 +97,9 @@ function startRound() {
     } else{
       alert(`Cannot repeat names`)
       return
-      
     }
   }
+  //check to see if they chose a course and tee box
   if(!courseId) {alert('Must Choose a course'); return}
   if(!tees) {alert('Must Choose a tee box'); return}
   
@@ -104,14 +110,12 @@ function startRound() {
   
   //inject base scorecard
   document.body.innerHTML += `
+  <div class="courseTitle">${course}</div>
   <div class="scoreCard">
     <table class="table table table-bordered">
       <thead id="appendHeaderData">
         <tr id="appendHoles"> 
-
           <th  data-holes scope="col">Holes</th>
-          
-          
         </tr>
         <tr id="appendHandi">
           <th scope="row">Handicap</th></tr>
@@ -137,16 +141,11 @@ function startRound() {
   }
   holesHTML += `<th scope="col">Total: </th>`
   holesSelector.innerHTML +=  holesHTML;
+
   // display the yardage for the tee boxes
-  document.getElementById('appendHeaderData').innerHTML += `<tr id="yardages"> <th scope="row">${tees} Yardage</th><tr>`
+  document.getElementById('appendHeaderData').innerHTML += `<tr id="yardages"> <th scope="row">${tees} Yds</th><tr>`
   
-
-
-
-  let handicapHTMl = ``;
-  let parHTML = ``;
-  console.log(courseId)
-  console.log(numOfHoles)
+  // display the yardages, handicap, and par;
   getCourseData(courseId)
   .then(response => {
     for(let i = 0; i < numOfHoles; i++){
@@ -166,37 +165,21 @@ function startRound() {
       //get the par for each of the holes and then display it 
       let par = response.data.holes[i].teeBoxes[teeNumber].par;
       document.getElementById('parForHole').innerHTML += `<td>${par}</td>`
-
-      
     }
   })
-  //display the handicap and the tees
 
-  // create all of the hadicaps for each of the holes
-
-  // create all of the par elements for each of the holes
-  document.getElementById('headers').innerHTML +=  `
-    
-    <span id="playersAnchor"></span>
-    `
-
-
-
-  // display the players names 
-  console.log(players, players.length)
+  // display the players names and inputs 
   for (let number = 0; number < players.length; number++) {
-
     let playerHTML = ` 
-    <tr id="player${number}">
-      <th scope="row" id="playerName">${players[number]}</th>
+      <tr id="player${number}">
+      <th scope="row" id="playerName">${players[number]}</th>`
 
-    `
     for (let i = 0; i < numOfHoles; i++) {
       if(i == 9 ){
         playerHTML += `<td></td>`
-        playerHTML += `<td data-scoreInput class="scoreInput"><input type="number"></td>`
+        playerHTML += `<td data-scoreInput class="scoreInput"><input class="player${number + 1}Value" type="number"></td>`
       } else{
-        playerHTML += `<td data-scoreInput class="scoreInput"><input type="number"></td>`
+        playerHTML += `<td data-scoreInput class="scoreInput"><input class="player${number + 1}Value" type="number"></td>`
       }
     }
     
@@ -208,41 +191,41 @@ function startRound() {
     document.getElementById('headers').innerHTML += `${playerHTML}`;
   }
   ///
+  ///
+  ///
+  ///
+  ////
+  
   //aad the event listeners to the input areas 
   for(let i = 0; i < numOfPlayers; i++){
-    let playerInput = $(`.player${i}`);
-    
+    let playerInput = document.querySelectorAll('[data-scoreInput]')
+    console.log(playerInput)
+    playerInput.forEach(playerIn => {
+      playerIn.addEventListener("click", function(){ 
+        // input value
+        let inputValue = this.firstChild.value;
+        let playerClickedOn = this.firstChild.className;
+        console.log(playerClickedOn, 'clicked on player')
+        console.log(inputValue, 'Value of the input')
+        // find out which player this belongs to 
+        if(playerClickedOn === 'player1Value'){
+          console.log('this is somehow working')
 
+        } else{
+          console.log('whack')
+        }
+        
+        // maybe do a loop to ge thte input value and 
+        
+
+      });
+
+    })
+    // playerInput.forEach(player => {
+    //   player.addEventListener("click", function(){ 
+    //     alert("Hello World!"); 
+    //   });
+    // })
   }
-
-
-
-  //get the api data
-
-  getCourseData(courseId)
-    // example of data
-    .then(json => {
-     console.log(json.data); 
-     return json.data;
-    })
-  // do the tee distances
-    .then(data => {
-     console.log(data.holes);
-     for(let i = 0; i < numOfHoles; i++){
-       let teeBox = data.holes[i].teeBoxes;
-      
-     }
-
-    })
-
-  // .then(json => {console.log(json); return json})
-
-  //do the handicap
-  // .then(data => {console.log(data); return data})
-
-  // do the par for the holes
-  // .then(data => {console.log(data)})
-  //inject the second set of html 
 }
-
 //use a case statement for the event listener for the input and then depending on which one it is you add it to the total value

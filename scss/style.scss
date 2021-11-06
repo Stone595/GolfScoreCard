@@ -26,7 +26,8 @@ $bblack : #262f3b;
 // Main body styles
 body{
   padding: 5rem;
-  @extend %flexAll
+  @extend %flexAll;
+  flex-direction: column;
 }
 
 ul{
@@ -113,6 +114,9 @@ td{
 // .centerTd{
 //   @extend %flexJust;
 // }
+.courseTitle{
+  font-size: 2.2rem;
+}
 .scoreCard {
   margin: 5rem;
   @extend %flexAll;
